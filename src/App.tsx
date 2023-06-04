@@ -1,21 +1,21 @@
 import './App.css';
 import {
   ColumnDirective,
+  ColumnMenu,
   ColumnsDirective,
   ContextMenu,
-  ContextMenuItem,
-  Edit,
+  ContextMenuItemModel,
   Filter,
+  FilterSettingsModel,
   GridComponent,
-  Group,
   Inject,
   Page,
-  PageSettingsModel,
   Resize,
+  SelectionSettingsModel,
   Sort,
-  SortSettingsModel,
 } from '@syncfusion/ej2-react-grids';
 import { data } from './datasource';
+import { ContextMenuItems, GridActionID } from './constants/ContextMenuItems';
 
 const columnNames = [
   'OrderID',
@@ -25,28 +25,42 @@ const columnNames = [
   'ShipCountry',
 ];
 
-const editing = { allowDeleting: true, allowEditing: true };
-
 const App = () => {
-  const pageSettings: PageSettingsModel = { pageSize: 6 };
-  const sortSettings: SortSettingsModel = {
-    columns: [
-      { field: 'OrderID', direction: 'Ascending' },
-      { field: 'CustomerID', direction: 'Ascending' },
-      { field: 'EmployeeID', direction: 'Ascending' },
-    ],
+  let grid: GridComponent | null;
+  // const selectionSettings: SelectionSettingsModel = { type: 'Multiple' };
+  const filterSettings: FilterSettingsModel = { type: 'CheckBox' };
+
+  /** Handle context menu */
+  const contextMenuItems: ContextMenuItemModel[] = [...ContextMenuItems];
+  const handleContextMenuClick = (args: any) => {
+    if (!grid) {
+      return;
+    }
+    switch (args.item.id) {
+      case GridActionID.selectColumn:
+        grid.columnSelecting;
+        break;
+      default:
+        break;
+    }
   };
 
   return (
     <div className="wrapper">
       <GridComponent
         dataSource={data}
-        editSettings={editing}
+        /** Allowed group */
         allowPaging={true}
         allowSorting={true}
+        allowFiltering={true}
         allowResizing={true}
-        pageSettings={pageSettings}
-        sortSettings={sortSettings}>
+        // selectionSettings={selectionSettings}
+        filterSettings={filterSettings}
+        /** Reference grid */
+        ref={(g) => (grid = g)}
+        /** Context Menu Items */
+        contextMenuItems={contextMenuItems}
+        contextMenuClick={handleContextMenuClick}>
         {data.length > 0 ? (
           <ColumnsDirective>
             {columnNames.map((dataField) => {
@@ -65,7 +79,7 @@ const App = () => {
         ) : (
           <p>No data field</p>
         )}
-        <Inject services={[Page, Sort, Filter, Group, Resize]} />
+        <Inject services={[Page, Sort, Filter, Resize, ContextMenu]} />
       </GridComponent>
     </div>
   );
