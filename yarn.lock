@@ -493,7 +493,7 @@
   resolved "https://registry.yarnpkg.com/@syncfusion/ej2-file-utils/-/ej2-file-utils-21.2.3.tgz#bf6a2fca8e7c0e7f001227e1208df3210d15d886"
   integrity sha512-fOvqTeRgKTkQSpHlSF6P1Twoa5DRrTq6Cs2lhnNyD26PofAh/58Zi88jJ+pdehtQb1JeAzxpvPJO2wiZ27VqjA==
 
-"@syncfusion/ej2-grids@21.2.8":
+"@syncfusion/ej2-grids@~21.2.8":
   version "21.2.8"
   resolved "https://registry.yarnpkg.com/@syncfusion/ej2-grids/-/ej2-grids-21.2.8.tgz#8d9d25f0ca3b94ccafd765fe9e5e08b63785fe1c"
   integrity sha512-tmICRUUiTtEomOdsA8tfvvEha7NGj+YEC/dKNWCTSegpxiE20GPZIp9B1c3AHfOPo1eKlmM4LSip8NetTnYjkw==
@@ -581,14 +581,14 @@
   dependencies:
     "@syncfusion/ej2-base" "~21.2.3"
 
-"@syncfusion/ej2-react-grids@^21.2.8":
+"@syncfusion/ej2-react-treegrid@^21.2.8":
   version "21.2.8"
-  resolved "https://registry.yarnpkg.com/@syncfusion/ej2-react-grids/-/ej2-react-grids-21.2.8.tgz#897c261558c6bc3286b6bc7885d68ab1a8137a8d"
-  integrity sha512-Zm777LGHfJgjV9geHGRH4x5tzks7usxjBEZkRiNCZmPR1qXItphJpcCJEoxTPHgtQCW4Xv8uc61qPyw+N7LaeQ==
+  resolved "https://registry.yarnpkg.com/@syncfusion/ej2-react-treegrid/-/ej2-react-treegrid-21.2.8.tgz#3dd4b6d1d355b69796b4ce18d06e5dca8beec95c"
+  integrity sha512-iqva6++7FzxhpxKUgCgNp8H47gy1PEBPrGbsVXz5fi331HX+q5iTctMg8tc6ir8IkNH8KAkfi7Yj/l9l0p/Q+A==
   dependencies:
     "@syncfusion/ej2-base" "~21.2.3"
-    "@syncfusion/ej2-grids" "21.2.8"
     "@syncfusion/ej2-react-base" "~21.2.8"
+    "@syncfusion/ej2-treegrid" "21.2.8"
 
 "@syncfusion/ej2-splitbuttons@~21.2.5":
   version "21.2.5"
@@ -596,6 +596,16 @@
   integrity sha512-SCyYHcstrA5FU9corJxZMjoDjsIRZYDFvSLKyyrfPYgI9Ece2Sr87EGGeYf4WHBxJlpQ3Qcrn0zvwTB1ND5mwQ==
   dependencies:
     "@syncfusion/ej2-base" "~21.2.3"
+    "@syncfusion/ej2-popups" "~21.2.4"
+
+"@syncfusion/ej2-treegrid@21.2.8":
+  version "21.2.8"
+  resolved "https://registry.yarnpkg.com/@syncfusion/ej2-treegrid/-/ej2-treegrid-21.2.8.tgz#a9b823ed6b6bd9192be72219df0c09e43d68f832"
+  integrity sha512-qT832Qgsl/j0ScSxgmLefI3ZPY90eFfLKX1buNg24xZewFt4+RDMEmkJUIxnZjh9ManrdoaeNceN/vHfLXbzgw==
+  dependencies:
+    "@syncfusion/ej2-base" "~21.2.3"
+    "@syncfusion/ej2-data" "~21.2.8"
+    "@syncfusion/ej2-grids" "~21.2.8"
     "@syncfusion/ej2-popups" "~21.2.4"
 
 "@types/json-schema@^7.0.9":

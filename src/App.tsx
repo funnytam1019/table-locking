@@ -1,87 +1,66 @@
-import './App.css';
 import {
   ColumnDirective,
-  ColumnMenu,
   ColumnsDirective,
-  ContextMenu,
-  ContextMenuItemModel,
-  Filter,
-  FilterSettingsModel,
-  GridComponent,
   Inject,
-  Page,
   Resize,
-  SelectionSettingsModel,
-  Sort,
-} from '@syncfusion/ej2-react-grids';
-import { data } from './datasource';
-import { ContextMenuItems, GridActionID } from './constants/ContextMenuItems';
+  TreeGridComponent,
+} from '@syncfusion/ej2-react-treegrid';
 
-const columnNames = [
-  'OrderID',
-  'CustomerID',
-  'EmployeeID',
-  'Freight',
-  'ShipCountry',
-];
+import { sortData } from './datasource';
+import './App.css';
+
+const fieldNames = ['Category', 'orderName', 'orderDate', 'price'];
+
+const headerTextMapping: { [key: string]: string } = {
+  Category: 'Category',
+  orderName: 'Order Name',
+  orderDate: 'Order Date',
+  price: 'Price',
+};
 
 const App = () => {
-  let grid: GridComponent | null;
-  // const selectionSettings: SelectionSettingsModel = { type: 'Multiple' };
-  const filterSettings: FilterSettingsModel = { type: 'CheckBox' };
-
-  /** Handle context menu */
-  const contextMenuItems: ContextMenuItemModel[] = [...ContextMenuItems];
-  const handleContextMenuClick = (args: any) => {
-    if (!grid) {
-      return;
-    }
-    switch (args.item.id) {
-      case GridActionID.selectColumn:
-        grid.columnSelecting;
-        break;
-      default:
-        break;
-    }
-  };
-
   return (
     <div className="wrapper">
-      <GridComponent
-        dataSource={data}
-        /** Allowed group */
-        allowPaging={true}
-        allowSorting={true}
-        allowFiltering={true}
+      <TreeGridComponent
+        dataSource={sortData}
+        treeColumnIndex={1}
+        childMapping="subtasks"
+        /** Settings */
         allowResizing={true}
-        // selectionSettings={selectionSettings}
-        filterSettings={filterSettings}
-        /** Reference grid */
-        ref={(g) => (grid = g)}
-        /** Context Menu Items */
-        contextMenuItems={contextMenuItems}
-        contextMenuClick={handleContextMenuClick}>
-        {data.length > 0 ? (
+        width="auto">
+        <Inject services={[Resize]} />
+        {sortData ? (
           <ColumnsDirective>
-            {columnNames.map((dataField) => {
+            {fieldNames.map((fieldName: string) => {
               return (
                 <ColumnDirective
-                  field={dataField}
-                  width="100"
-                  headerTextAlign={
-                    dataField === 'OrderID' ? 'Right' : 'Justify'
+                  field={fieldName}
+                  headerText={headerTextMapping[fieldName]}
+                  width="150"
+                  format={
+                    fieldName === 'orderDate'
+                      ? 'yMd'
+                      : fieldName === 'price'
+                      ? 'C0'
+                      : ''
                   }
-                  textAlign={dataField === 'OrderID' ? 'Right' : 'Justify'}
+                  type={
+                    fieldName === 'orderDate'
+                      ? 'date'
+                      : fieldName === 'price'
+                      ? 'number'
+                      : ''
+                  }
                 />
               );
             })}
           </ColumnsDirective>
         ) : (
-          <p>No data field</p>
+          <p>Unble to get data</p>
         )}
-        <Inject services={[Page, Sort, Filter, Resize, ContextMenu]} />
-      </GridComponent>
+      </TreeGridComponent>
     </div>
   );
 };
+
 export default App;
